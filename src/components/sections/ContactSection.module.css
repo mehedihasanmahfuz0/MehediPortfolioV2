@@ -1,0 +1,113 @@
+.section {
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  padding: 5rem 1.25rem;
+  position: relative; z-index: 2; isolation: isolate;
+}
+@media (min-width: 768px)  { .section { padding: 6rem 2.5rem; } }
+@media (min-width: 1024px) { .section { padding: 8rem 4rem;   } }
+
+.wrap { max-width: 1080px; margin: 0 auto; width: 100%; }
+
+.eyebrow {
+  font-family: var(--mono); font-size: .62rem;
+  letter-spacing: .22em; text-transform: uppercase; color: var(--gold);
+  display: inline-flex; align-items: center; gap: .6rem; margin-bottom: 2.5rem;
+}
+.eyebrow::before { content: ''; width: 20px; height: 1px; background: var(--gold); }
+
+.grid {
+  display: grid; grid-template-columns: 1fr;
+  gap: 3.5rem; margin-top: 1rem;
+}
+@media (min-width: 900px) { .grid { grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; } }
+
+/* CTA spotlight */
+.cta {
+  font-family: var(--serif);
+  font-size: clamp(1.9rem, 5vw, 3.2rem);
+  font-weight: 400; line-height: 1.15;
+  margin-bottom: 2.5rem;
+}
+.ctaWord { display: inline; opacity: .1; }
+.ctaEm   { font-style: italic; color: var(--gold); }
+
+/* Contact links */
+.links { display: flex; flex-direction: column; gap: 0; }
+.linkRow {
+  display: flex; align-items: center; gap: 1rem;
+  padding: .9rem 0; border-bottom: 1px solid var(--border);
+  transition: padding-left .3s var(--ease1);
+}
+.linkRow:last-child { border-bottom: none; }
+.linkRow:hover { padding-left: .5rem; }
+
+.linkIcon {
+  width: 36px; height: 36px; flex-shrink: 0;
+  background: var(--bg2); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center; color: var(--gold);
+}
+.linkIcon svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+
+.linkLabel { font-family: var(--mono); font-size: .55rem; letter-spacing: .15em; text-transform: uppercase; color: var(--muted2); margin-bottom: .2rem; }
+.linkVal   { font-size: .82rem; color: var(--ink); transition: color .2s; word-break: break-all; }
+.linkRow:hover .linkVal { color: var(--gold); }
+
+/* Socials */
+.socials { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 2rem; }
+.social  {
+  font-family: var(--mono); font-size: .6rem; letter-spacing: .1em;
+  text-transform: uppercase; padding: .5rem 1rem;
+  border: 1px solid var(--border2); color: var(--muted);
+  transition: all .25s;
+}
+.social:hover { color: var(--ink); border-color: var(--ink); background: var(--bg2); }
+
+/* Form */
+.form { display: flex; flex-direction: column; gap: 1.4rem; will-change: transform; }
+
+.field { position: relative; }
+.label {
+  display: block; font-family: var(--mono); font-size: .58rem;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: .45rem;
+}
+.input, .textarea {
+  width: 100%; background: transparent;
+  border: none; border-bottom: 1px solid var(--border2);
+  padding: .55rem 0; font-size: .88rem;
+  color: var(--ink); outline: none;
+  transition: border-color .3s;
+  resize: none;
+}
+.input:focus, .textarea:focus { border-color: var(--gold); }
+.textarea { min-height: 110px; line-height: 1.6; }
+
+/* Animated focus underline — expands from center */
+.fieldLine {
+  position: absolute; bottom: 0; left: 50%; right: 50%;
+  height: 2px; background: var(--gold);
+  transition: left .4s var(--ease1), right .4s var(--ease1);
+  pointer-events: none;
+}
+.field:focus-within .fieldLine { left: 0; right: 0; }
+
+/* Submit */
+.submit {
+  font-size: .75rem; font-weight: 600; letter-spacing: .1em;
+  text-transform: uppercase; padding: .9rem 2rem;
+  background: var(--ink); color: var(--bg);
+  border: 1.5px solid var(--ink); width: 100%;
+  position: relative; overflow: hidden;
+  transition: color .4s var(--ease1), border-color .4s var(--ease1);
+  cursor: pointer;
+}
+.submit::before {
+  content: ''; position: absolute; inset: 0;
+  background: var(--gold); transform: scaleX(0);
+  transform-origin: left; transition: transform .55s var(--ease1); z-index: 0;
+}
+.submit:not(:disabled):hover::before { transform: scaleX(1); }
+.submit:not(:disabled):hover { color: var(--bg); border-color: var(--gold); }
+.submit span { position: relative; z-index: 1; }
+.submit:disabled { opacity: .7; cursor: not-allowed; }

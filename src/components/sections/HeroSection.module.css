@@ -1,0 +1,209 @@
+.hero {
+  min-height: 100svh;
+  padding-top: calc(var(--nav-h) + 3rem);
+  padding-bottom: 4rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+@media (min-width: 768px)  { .hero { padding-left: 2.5rem; padding-right: 2.5rem; } }
+@media (min-width: 1024px) { .hero { padding-left: 4rem;   padding-right: 4rem;   } }
+
+/* ── Background layers ── */
+.bgLines {
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent, transparent 28px,
+    var(--border) 28px, var(--border) 29px
+  );
+  opacity: .55;
+  will-change: transform;
+  pointer-events: none;
+}
+.bgMark {
+  position: absolute;
+  top: 50%; right: -2%;
+  transform: translateY(-50%);
+  font-family: var(--mono);
+  font-size: clamp(120px, 22vw, 300px);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--ink);
+  opacity: .028;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  will-change: transform;
+}
+.bgRule {
+  position: absolute;
+  top: 50%; left: 0; right: 0;
+  height: 1px;
+  background: var(--border2);
+  transform: scaleX(0);
+  transform-origin: left;
+  will-change: transform;
+  pointer-events: none;
+}
+.bgCorner {
+  position: absolute;
+  bottom: 2.5rem; left: 1.5rem;
+  width: 44px; height: 44px;
+  border-left: 1px solid var(--border2);
+  border-bottom: 1px solid var(--border2);
+  pointer-events: none;
+  opacity: 0;
+}
+@media (min-width: 768px) { .bgCorner { bottom: 3rem; left: 3rem; } }
+
+/* ── Content ── */
+.inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1080px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-family: var(--mono);
+  font-size: .6rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--green);
+  border: 1px solid var(--border2);
+  padding: .35rem .85rem;
+  margin-bottom: 2rem;
+  background: var(--green-bg);
+}
+.badgeDot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: blink 2.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: .3; transform: scale(.8); }
+}
+
+/* Name lines — overflow:hidden clips the translateY reveal */
+.nameWrap  { overflow: hidden; margin-bottom: .3rem; }
+.name2Wrap { overflow: hidden; }
+
+.name1 {
+  font-family: var(--serif);
+  font-size: clamp(3rem, 12vw, 9rem);
+  font-weight: 400;
+  line-height: .95;
+  color: var(--ink);
+  display: block;
+}
+.name2 {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(2rem, 8vw, 6rem);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 2.5rem;
+}
+
+.role {
+  font-family: var(--mono);
+  font-size: .7rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.8rem;
+}
+
+.value {
+  font-size: clamp(.95rem, 2.2vw, 1.15rem);
+  font-weight: 400;
+  color: var(--muted);
+  line-height: 1.75;
+  max-width: 54ch;
+  margin-bottom: 3rem;
+}
+.value strong { color: var(--ink); font-weight: 600; }
+
+/* CTAs */
+.ctas { display: flex; flex-wrap: wrap; gap: .75rem; margin-bottom: 3.5rem; }
+
+.btnSolid {
+  font-size: .75rem; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  padding: .9rem 2rem;
+  background: var(--ink); color: var(--bg);
+  border: 1.5px solid var(--ink);
+  position: relative; overflow: hidden;
+  transition: color .4s var(--ease1), border-color .4s var(--ease1);
+}
+.btnSolid::before {
+  content: ''; position: absolute; inset: 0;
+  background: var(--gold); transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .55s var(--ease1); z-index: 0;
+}
+.btnSolid:hover::before { transform: scaleX(1); }
+.btnSolid:hover { color: var(--bg); border-color: var(--gold); }
+.btnSolid span { position: relative; z-index: 1; }
+
+.btnOutline {
+  font-size: .75rem; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  padding: .9rem 2rem;
+  border: 1.5px solid var(--border2); color: var(--ink);
+  position: relative; overflow: hidden;
+  transition: color .4s var(--ease1), border-color .4s var(--ease1);
+}
+.btnOutline::before {
+  content: ''; position: absolute; inset: 0;
+  background: var(--ink); transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .55s var(--ease1); z-index: 0;
+}
+.btnOutline:hover::before { transform: scaleX(1); }
+.btnOutline:hover { color: var(--bg); border-color: var(--ink); }
+.btnOutline span { position: relative; z-index: 1; }
+
+/* Stats */
+.stats {
+  display: flex; flex-wrap: wrap; gap: 2rem;
+  padding-top: 2.5rem; margin-top: 2.5rem;
+  border-top: 1px solid var(--border);
+}
+.stat {}
+.statN {
+  font-family: var(--serif);
+  font-size: 2.2rem; color: var(--ink);
+  line-height: 1; display: block;
+}
+.statL {
+  font-family: var(--mono);
+  font-size: .58rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--muted);
+  display: block; margin-top: .3rem;
+}
+
+/* Scroll cue */
+.scrollCue {
+  display: flex; align-items: center; gap: .75rem;
+  font-family: var(--mono); font-size: .58rem;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--muted2); margin-top: 3rem;
+}
+.scrollLine { width: 0; height: 1px; background: var(--muted2); }
+.scrollLabel {}
